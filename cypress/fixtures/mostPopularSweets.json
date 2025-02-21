@@ -1,0 +1,32 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Chocolate Cups",
+      "description": "Candy Chocolate Cups.",
+      "price": "£1.00",
+      "imageAlt": "chocolate cups"
+    },
+    {
+      "id": "2",
+      "name": "Sherbert Straws",
+      "description": "Rainbow Dust Straws - Choose your colour.",
+      "price": "£0.75",
+      "imageAlt": "sherbert straws"
+    },
+    {
+      "id": "3", 
+      "name": "Sherbert Discs",
+      "description": "UFO's Sherbert Filled Flying Saucers.",
+      "price": "£0.95",
+      "imageAlt": "sherbert discs"
+    },
+    {
+      "id": "4",
+      "name": "Bon Bons",
+      "description": "Pink Strawberry Bonbons - sugar dusted, strawberry flavoured chewy sweets.",
+      "price": "£1.00",
+      "imageAlt": "bonbon"
+    }
+  ]
+}

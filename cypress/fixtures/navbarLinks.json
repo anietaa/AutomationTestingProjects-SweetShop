@@ -1,0 +1,9 @@
+{
+    "expectedLinks": ["Sweets", "About", "Login", "Basket"],
+    "linkDestinations": {
+      "Sweets": "/sweets",
+      "About": "/about",
+      "Login": "/login",
+      "Basket": "/basket"
+    }
+  }

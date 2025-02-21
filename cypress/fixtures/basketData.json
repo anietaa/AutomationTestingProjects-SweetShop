@@ -1,0 +1,23 @@
+{
+    "billingDetails": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "address": "1234 Main St",
+      "address2": "Apartment 5B",
+      "country": "United Kingdom",
+      "city": "Bristol",
+      "zip": "BS1 1AA"
+    },
+    "paymentDetails": {
+      "cardName": "John Doe",
+      "cardNumber": "4111 1111 1111 1111",
+      "expiration": "12/25",
+      "cvv": "123"
+    },
+    "deliveryOptions": {
+      "collectFree": "#exampleRadios1",
+      "standardShipping": "#exampleRadios2"
+    }
+  }
+  
