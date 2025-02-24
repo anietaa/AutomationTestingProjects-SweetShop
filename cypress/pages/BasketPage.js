@@ -16,16 +16,18 @@ class BasketPage extends HomePage {
         //Basket Items column
         basketColumnTitle: () => cy.get(".mb-4 h4 span.text-muted").contains("Your Basket"),
         basketItemTotalCount: () => cy.get("#basketCount"),
-        basketItems: () => cy.get("#basketItems"),
-        itemNames: () => cy.get("h6.my-0"),
+        basketItems: () => cy.get("#basketItems li"),
+        itemNames: () => cy.get("#basketItems li h6.my-0"),
         itemQuantities: () => cy.get("#basketItems li small.text-muted"),
         perItemPrice: () => cy.get("#basketItems li span.text-muted"),
         deleteItem: () => cy.get("#basketItems li a.small"),
         totalGBP: () => cy.get("#basketItems .list-group-item span:nth-child(1)"),
-        toTalGBPPrice: () => cy.get("#basketItems .list-group-item strong:nth-child(2)"),
+        totalGBPPrice: () => cy.get("#basketItems li.list-group-item").last().find("strong"),
+
+
 
         //Billing Address
-        billingAddressTitle: () => cy.get(".col-md-8 h4").contains("Billing address"),
+        //billingAddressTitle: () => cy.get(".col-md-8 h4").contains("Billing address"),
         firstName: () => cy.get("#name").eq(0),
         lastName: () => cy.get("#name").eq(1),
         email: () => cy.get("#email"),
@@ -34,6 +36,8 @@ class BasketPage extends HomePage {
         country: () => cy.get("#country"),
         city: () => cy.get("#city"),
         zipCode: () => cy.get("#zip"),
+        billingAddress:()=>cy.get('.col-md-8.order-md-1 h4.mb-3').contains('Billing address').should('be.visible'),
+
 
         //payment
         paymentSectionTitle: () => cy.get("h4.mb-3").contains("Payment"),
@@ -49,28 +53,45 @@ class BasketPage extends HomePage {
         promoCode: () => cy.get(".input-group:nth-child(1)"),
         emptyBasket: () => cy.get(".input-group:nth-child(2) a"),
        //Checkout
-        submitButton: () => cy.get("button[type='submit']")
-
+        submitButton: () => cy.get('.col-md-8 form.needs-validation button.btn.btn-primary.btn-lg.btn-block:nth-child(11)').find("button[type='submit']")
     };
 
-    verifyBasketPageHeader(){
-        this.elements.navLinks().contains(" Basket").click();
-        cy.url().should("include","/basket");
+    verifyBasketPageHeader() {
+        this.elements.navLinks().contains("Basket").click();
+        cy.url().should("include", "/basket");
         this.elementsBasket.basketPageTitle().should("be.visible");
         this.elementsBasket.basketPageTitleLeadText().should("be.visible");
-    }
-    //Verifying basket column
-    verifyYourBasketColumn(){
-        this.elementsBasket.basketColumnTitle().should("be.visible");
-
-    }
-
-    getTotalItemCount(){
-        this.elementsBasket.basketItemTotalCount().its("length");
-    }
-
+      }
     
-}
-
-
-export default new BasketPage;
+      validateBasketContents() {
+        cy.verifyBasketContents();
+      }
+    
+      verifyTotalPrice(expectedPrice) {
+        this.elementsBasket.totalGBPPrice().should("contain", expectedPrice);
+      }
+    
+      fillBillingDetails() {
+        cy.fixture("basketData").then(({ billingDetails }) => {
+          cy.get('.col-md-8 form.needs-validation', { timeout: 10000 }).should('be.visible');
+          cy.fillForm(billingDetails);
+        });
+      }
+    
+      fillPaymentDetails() {
+        cy.fillCardDetails();
+      }
+    
+      selectDeliverType() {
+        this.elementsBasket.deliverySectionTitle().should("be.visible");
+        this.elementsBasket.collectFree().should("be.checked");
+        this.elementsBasket.standardShipping().click().should("be.checked");
+      }
+    
+      placeOrder() {
+        this.elementsBasket.submitButton().should('be.visible').click()
+      }
+    }
+    
+    export default new BasketPage();
+    
