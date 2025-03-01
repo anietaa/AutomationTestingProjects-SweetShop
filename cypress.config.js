@@ -12,6 +12,7 @@ const { defineConfig } = require("cypress");
 const fs = require("fs-extra"); // ✅ Import fs-extra for file operations
 
 module.exports = defineConfig({
+  projectId: "svaivz",
   e2e: {
     baseUrl: "https://sweetshop.netlify.app",
     specPattern: "cypress/e2e/**/*.cy.js",

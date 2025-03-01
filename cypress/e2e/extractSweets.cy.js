@@ -18,6 +18,4 @@ describe('Extract Sweets Page Data', () => {
       cy.log('✅ Scraped data saved to sweetsData.json');
     });
   });
-
-  
 });
